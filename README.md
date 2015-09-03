@@ -1,7 +1,7 @@
 Filters for [Rock Framework](https://github.com/romeOz/rock)
 =================
 
-Filters for [Rock Route](https://github.com/romeOz/rock-route), actions of controllers (in the composition of the [Rock Components](https://github.com/romeOz/rock-components)) and snippets of [Rock Template](https://github.com/romeOz/rock-template).
+Filters for [Rock Route](https://github.com/romeOz/rock-route), actions of controller (in the composition of the [Rock Components](https://github.com/romeOz/rock-components)) and snippets of [Rock Template](https://github.com/romeOz/rock-template).
 
 Composition
 ------------------
