@@ -1,0 +1,44 @@
+{
+  "name": "romeoz/rock-filters",
+  "description": "Filters for Rock Framework",
+  "keywords": [
+    "filters",
+    "CORS",
+    "CSP",
+    "CSRF",
+    "rate limiter",
+    "token bucket"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "support": {
+    "email": "serggalka@gmail.com",
+    "issues": "https://github.com/romeOz/rock-filters/issues",
+    "source": "https://github.com/romeOz/rock-filters"
+  },
+  "authors": [
+    {
+      "name": "Ruslan",
+      "email": "serggalka@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "romeoz/rock-base": "*@dev"
+  },
+  "suggest": {
+    "romeoz/rock-response": "required by module Rock Response",
+    "romeoz/rock-request": "required by module Rock Request",
+    "romeoz/rock-session": "required by module Rock Session for rate limiter and CSRF"
+  },
+  "autoload": {
+    "psr-4": {
+      "rock\\filters\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.10-dev"
+    }
+  }
+}
