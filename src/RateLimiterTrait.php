@@ -28,7 +28,16 @@ trait RateLimiterTrait
      * @var callable|bool
      */
     public $dependency = true;
-
+    /**
+     * Invert checking.
+     * @var bool
+     */
+    public $invert = false;
+    /**
+     * Hash-key.
+     * @var string
+     */
+    public $name;
 
     public function init()
     {
@@ -60,7 +69,7 @@ trait RateLimiterTrait
             if ($this->throwException === true) {
                 throw new FilterException($this->errorMessage);
             }
-            return false;
+            return $this->invert;
         }
 
         if ($this->dependency) {
@@ -68,7 +77,7 @@ trait RateLimiterTrait
         }
         //$this->addHeaders($response, $limit, $maxRequests - 1, $period);
 
-        return true;
+        return !$this->invert;
     }
 
     /**
