@@ -26,11 +26,6 @@
     "php": ">=5.4.0",
     "romeoz/rock-base": "*@dev"
   },
-  "suggest": {
-    "romeoz/rock-response": "required by module Rock Response",
-    "romeoz/rock-request": "required by module Rock Request",
-    "romeoz/rock-session": "required by module Rock Session for rate limiter and CSRF"
-  },
   "autoload": {
     "psr-4": {
       "rock\\filters\\": "src/"
