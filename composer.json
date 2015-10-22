@@ -26,6 +26,9 @@
     "php": ">=5.4.0",
     "romeoz/rock-base": "0.11.*"
   },
+  "suggest": {
+    "romeoz/rock-session": "required for RateLimiter filters"
+  },
   "autoload": {
     "psr-4": {
       "rock\\filters\\": "src/"
