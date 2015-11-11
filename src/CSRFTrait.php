@@ -15,10 +15,6 @@ trait CSRFTrait
      * @var CSRF|string|array the CSRF instance.
      */
     public $csrf = 'csrf';
-    /**
-     * @var Request
-     */
-    public $request = 'request';
     /** @var  string */
     public $compare;
     public $verbs = ['POST', 'PUT', 'DELETE', 'PATH'];
@@ -30,10 +26,9 @@ trait CSRFTrait
      */
     public function init()
     {
+        parent::init();
         $this->csrf = Instance::ensure($this->csrf, '\rock\csrf\CSRF');
         $this->csrf->enableCsrfValidation = $this->validate;
-        parent::init();
-        $this->request = Instance::ensure($this->request, '\rock\request\Request');
         $this->verbs = (array)$this->verbs;
         if ($this->verbs === ['*']) {
             $this->verbs = ['GET', 'POST', 'PUT', 'HEAD', 'OPTIONS', 'PATH'];
@@ -76,19 +71,19 @@ trait CSRFTrait
     protected function getGlobalsVars()
     {
         if ($this->request->isPost() && in_array('POST', $this->verbs, true)) {
-            return Request::post();
+            return $this->request->post();
         }
 
         if ($this->request->isGet() && in_array('GET', $this->verbs, true)) {
-            return Request::get();
+            return $this->request->get();
         }
 
         if ($this->request->isPut() && in_array('PUT', $this->verbs, true)) {
-            return Request::post();
+            return $this->request->post();
         }
 
         if ($this->request->isDelete() && in_array('DELETE', $this->verbs, true)) {
-            return Request::post();
+            return $this->request->post();
         }
 
         return [];

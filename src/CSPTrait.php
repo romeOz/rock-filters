@@ -7,14 +7,18 @@ use rock\response\Response;
 
 trait CSPTrait
 {
-
     public $policy = [];
 
-    public function send()
+    public function init()
     {
+        parent::init();
         if (!$this->response instanceof Response) {
             throw new FilterException(FilterException::NOT_INSTALL_RESPONSE);
         }
+    }
+
+    public function send()
+    {
         $policy = [];
         if (!isset($this->policy['default-src'])) {
             $this->policy['default-src'] = "'self'";

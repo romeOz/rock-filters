@@ -10,6 +10,7 @@ use rock\session\Session;
 trait RateLimiterTrait
 {
     /**
+     * Instance Rock Session.
      * @var Session|string|array
      */
     public $session = 'session';

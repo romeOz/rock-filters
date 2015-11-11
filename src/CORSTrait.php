@@ -11,11 +11,6 @@ use rock\response\Response;
 trait CORSTrait
 {
     /**
-     * @var Request|string|array the current request. If not set, the `request` application component will be used.
-     */
-    public $request = 'request';
-
-    /**
      * @var array Basic headers handled for the CORS requests.
      */
     public $cors = [
@@ -33,9 +28,7 @@ trait CORSTrait
         if (!$this->response instanceof Response) {
             throw new FilterException(FilterException::NOT_INSTALL_RESPONSE);
         }
-        $this->request = Instance::ensure($this->request, '\rock\request\Request');
     }
-
 
     /**
      * Extract CORS headers from the request.
@@ -117,13 +110,13 @@ trait CORSTrait
 
     /**
      * Adds the CORS headers to the response.
-     * @param Response $response
      * @param array CORS headers which have been computed.
+     * @throws FilterException
      */
-    public function addCorsHeaders(Response $response, $headers)
+    public function addCorsHeaders($headers)
     {
         if (!empty($headers)) {
-            $responseHeaders = $response->getHeaders();
+            $responseHeaders = $this->response->getHeaders();
             foreach ($headers as $field => $value) {
                 $responseHeaders->set($field, $value);
             }

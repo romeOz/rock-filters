@@ -3,7 +3,6 @@
 namespace rock\filters;
 
 
-use rock\helpers\Instance;
 use rock\request\Request;
 use rock\response\Response;
 
@@ -46,21 +45,20 @@ trait ContentNegotiatorTrait
      * If this property is empty or not set, language negotiation will be skipped.
      */
     public $languages;
-    /**
-     * @var Request|string|array the current request. If not set, the `request` application component will be used.
-     */
-    public $request = 'request';
+
+    public function init()
+    {
+        parent::init();
+        if (!$this->response instanceof Response) {
+            throw new FilterException(FilterException::NOT_INSTALL_RESPONSE);
+        }
+    }
 
     /**
      * Negotiates the response format and application language.
      */
     public function negotiate()
     {
-        if (!$this->response instanceof Response) {
-            throw new FilterException(FilterException::NOT_INSTALL_RESPONSE);
-        }
-        $this->request = Instance::ensure($this->request, '\rock\request\Request');
-
         if (!empty($this->formats)) {
             $this->negotiateContentType($this->request, $this->response);
         }
@@ -74,7 +72,7 @@ trait ContentNegotiatorTrait
      */
     protected function negotiateContentType(Request $request, Response $response)
     {
-        if (!empty($this->formatParam) && ($format = Request::get($this->formatParam)) !== null) {
+        if (!empty($this->formatParam) && ($format = $this->request->get($this->formatParam)) !== null) {
             if (in_array($format, $this->formats)) {
                 $response->format = $format;
                 $response->acceptMimeType = null;
@@ -118,7 +116,7 @@ trait ContentNegotiatorTrait
      */
     protected function negotiateLanguage(Request $request)
     {
-        if (!empty($this->languageParam) && ($language = Request::get($this->languageParam)) !== null) {
+        if (!empty($this->languageParam) && ($language = $this->request->get($this->languageParam)) !== null) {
             if (isset($this->languages[$language])) {
                 return $this->languages[$language];
             }
