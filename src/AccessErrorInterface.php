@@ -1,6 +1,6 @@
 <?php
 
-namespace rock\access;
+namespace rock\filters;
 
 
 interface AccessErrorInterface
