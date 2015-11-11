@@ -12,12 +12,6 @@ trait AccessTrait
      */
     public $rules = [];
     /**
-     * Owner object
-     *
-     * @var object
-     */
-    public $owner;
-    /**
      * Sending response headers. `true` by default.
      * @var bool
      */
