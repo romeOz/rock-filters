@@ -5,17 +5,11 @@ namespace rock\access;
 
 interface AccessErrorInterface
 {
-    const E_VERBS = 1;
-    const E_IPS = 2;
-    const E_USERS = 4;
-    const E_ROLES = 8;
-    const E_CUSTOM = 16;
+    const E_IPS = 1;
+    const E_USERS = 2;
+    const E_ROLES = 4;
+    const E_CUSTOM = 8;
 
-    /**
-     * Is http-method error.
-     * @return boolean
-     */
-    public function isErrorVerbs();
     /**
      * Is username error.
      * @return boolean

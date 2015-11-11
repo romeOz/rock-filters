@@ -9,10 +9,11 @@ Composition
  * [CSP](http://www.w3.org/TR/2012/CR-CSP-20121115/)
  * [CSRF](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29)
  * [Rate limiter](https://en.wikipedia.org/wiki/Token_bucket) 
+ * Access (IP, [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control), username)
 
 Requirements
 -------------------
- * PHP 5.4+
+ * **PHP 5.4+**
 
 License
 -------------------

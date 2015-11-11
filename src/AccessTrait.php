@@ -59,11 +59,6 @@ trait AccessTrait
         return $this->errors;
     }
 
-    public function isErrorVerbs()
-    {
-        return (bool)(self::E_VERBS & $this->errors);
-    }
-
     public function isErrorUsers()
     {
         return (bool)(self::E_USERS & $this->errors);
