@@ -14,31 +14,6 @@ trait RateLimiterTrait
      * @var Session|string|array
      */
     public $session = 'session';
-    /**
-     * @var boolean whether to include rate limit headers in the response
-     */
-    public $sendHeaders = true;
-
-    public $throwException = false;
-    /**
-     * @var string the message to be displayed when rate limit exceeds
-     */
-    public $errorMessage = 'Rate limit exceeded.';
-    /**
-     * The condition which to run the {@see \rock\filters\RateLimiterTrait::saveAllowance()}.
-     * @var callable|bool
-     */
-    public $dependency = true;
-    /**
-     * Invert checking.
-     * @var bool
-     */
-    public $invert = false;
-    /**
-     * Hash-key.
-     * @var string
-     */
-    public $name;
 
     public function init()
     {

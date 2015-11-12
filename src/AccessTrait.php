@@ -4,22 +4,10 @@ namespace rock\filters;
 
 
 use rock\helpers\Instance;
+use rock\response\Response;
 
 trait AccessTrait
 {
-    /**
-     * @var array
-     */
-    public $rules = [];
-    /**
-     * Sending response headers. `true` by default.
-     * @var bool
-     */
-    public $sendHeaders = false;
-    /**
-     * @var int
-     */
-    protected $errors = 0;
     /** @var  \rock\user\User|string|array */
     public $user = 'user';
 
@@ -38,39 +26,7 @@ trait AccessTrait
         if (empty($this->rules) || !is_array($this->rules) || empty($this->owner)) {
             return true;
         }
-        if ($valid = $this->checkInternal()) {
-            $this->errors = 0;
-        }
-        return $valid;
-    }
-
-    /**
-     * Returns a errors.
-     * @return int
-     */
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    public function isErrorUsers()
-    {
-        return (bool)(self::E_USERS & $this->errors);
-    }
-
-    public function isErrorRoles()
-    {
-        return (bool)(self::E_ROLES & $this->errors);
-    }
-
-    public function isErrorIps()
-    {
-        return (bool)(self::E_IPS & $this->errors);
-    }
-
-    public function isErrorCustom()
-    {
-        return (bool)(self::E_CUSTOM & $this->errors);
+        return $this->checkInternal();
     }
 
     protected function checkInternal()
@@ -95,16 +51,16 @@ trait AccessTrait
         $rule['allow'] = (bool)$rule['allow'];
         $result = [];
         if (isset($rule['users'])) {
-            $result[] = $this->addError($this->matchUsers((array)$rule['users']), self::E_USERS, $rule['allow']);
+            $result[] =$this->matchUsers((array)$rule['users']);
         }
         if (isset($rule['ips'])) {
-            $result[] = $this->addError($this->matchIps((array)$rule['ips']), self::E_IPS, $rule['allow']);
+            $result[] = $this->matchIps((array)$rule['ips']);
         }
         if (isset($rule['roles'])) {
-            $result[] = $this->addError($this->matchRole((array)$rule['roles']), self::E_ROLES, $rule['allow']);
+            $result[] = $this->matchRole((array)$rule['roles']);
         }
         if (isset($rule['custom'])) {
-            $result[] = $this->addError($this->matchCustom($rule), self::E_CUSTOM, $rule['allow']);
+            $result[] = $this->matchCustom($rule);
         }
         if (empty($result)) {
             return null;
@@ -212,22 +168,6 @@ trait AccessTrait
             $this->sendHeaders();
         }
         return $result;
-    }
-
-    /**
-     * Adds a error.
-     * @param bool $is
-     * @param int $error
-     * @param bool $allow
-     * @return bool
-     */
-    protected function addError($is, $error, $allow)
-    {
-        if ($is === false || $allow === false) {
-            $this->errors |= $error;
-        }
-
-        return $is;
     }
 
     protected function sendHeaders()

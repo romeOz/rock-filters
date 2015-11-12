@@ -9,17 +9,12 @@ use rock\helpers\Instance;
 use rock\request\Request;
 use rock\response\Response;
 
-trait CSRFTrait
+trait CSRFFilterTrait
 {
     /**
      * @var CSRF|string|array the CSRF instance.
      */
     public $csrf = 'csrf';
-    /** @var  string */
-    public $compare;
-    public $verbs = ['POST', 'PUT', 'DELETE', 'PATH'];
-    public $validate = true;
-    public $throwException = false;
 
     /**
      * @throws \rock\helpers\InstanceException
